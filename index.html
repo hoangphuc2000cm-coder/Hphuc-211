@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hphucdpi - Free Fire Optimizer</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  body {
+    background-color: #0b0524;
+    background-image: radial-gradient(circle at 50% 0%, #2e1a68 0%, #0b0524 70%);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 80px; /* Space for bottom nav */
+  }
+
+  .container {
+    width: 100%;
+    max-width: 450px;
+    padding: 15px;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 10px;
+  }
+
+  .logo-area {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .logo-title {
+    font-size: 22px;
+    font-weight: 900;
+    color: #8b5cf6;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .logo-title span {
+    color: #fff;
+  }
+
+  .logo-subtitle {
+    font-size: 10px;
+    color: #a78bfa;
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+
+  .online-badge {
+    background: rgba(0, 255, 255, 0.1);
+    border: 1px solid #06b6d4;
+    color: #06b6d4;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+  }
+
+  .online-badge::before {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    background-color: #06b6d4;
+    border-radius: 50%;
+  }
+
+  /* Section Title */
+  .section-title {
+    color: #06b6d4;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-title::before {
+    content: '◆';
+    font-size: 10px;
+  }
+
+  /* Feature Cards */
+  .feature-card {
+    background: rgba(20, 10, 50, 0.6);
+    border: 1px solid #4c3a8e;
+    border-radius: 12px;
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    position: relative;
+  }
+
+  .icon-box {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+    font-size: 22px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  /* Specific Icon Colors */
+  .icon-aim-check { background: linear-gradient(135deg, #4c1d95, #2e1065); border-color: #7e22ce; }
+  .icon-aim-body { background: linear-gradient(135deg, #78350f, #451a03); border-color: #b45309; }
+  .icon-aim-drag { background: linear-gradient(135deg, #164e63, #083344); border-color: #0e7490; }
+  .icon-anti-band { background: linear-gradient(135deg, #3f3f46, #18181b); border-color: #52525b; }
+  .icon-dpi { background: linear-gradient(135deg, #854d0e, #422006); border-color: #ca8a04; }
+
+  .text-content {
+    flex: 1;
+  }
+
+  .text-content h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fbbf24;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  .text-content p {
+    font-size: 11px;
+    color: #a1a1aa;
+  }
+
+  /* Toggle Switch */
+  .toggle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+  }
+
+  .lock-icon {
+    font-size: 12px;
+    color: #fbbf24;
+  }
+
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+  }
+
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #3f3f46;
+    transition: .4s;
+    border-radius: 24px;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #a1a1aa;
+    transition: .4s;
+    border-radius: 50%;
+  }
+
+  /* Activation Box */
+  .activation-box {
+    background: rgba(20, 10, 50, 0.8);
+    border: 1px solid #fbbf24;
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 25px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.1);
+    position: relative;
+  }
+
+  .activation-title {
+    color: #fbbf24;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .key-input {
+    width: 100%;
+    background: #110d2e;
+    border: 1px solid #4c3a8e;
+    color: #fbbf24;
+    text-align: center;
+    padding: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    outline: none;
+  }
+
+  .btn-activate {
+    width: 100%;
+    background: linear-gradient(90deg, #8b5cf6, #06b6d4);
+    border: none;
+    color: white;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+  }
+
+  .btn-error {
+    background: linear-gradient(90deg, #8b5cf6, #06b6d4);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 20px;
+    margin-top: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  }
+
+  /* Bottom Navigation */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #0a051a;
+    border-top: 1px solid #2e1a68;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0 15px 0;
+    z-index: 10;
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    color: #6b7280;
+    font-size: 11px;
+    text-decoration: none;
+  }
+
+  .nav-item.active {
+    color: #06b6d4;
+  }
+
+  .nav-icon {
+    font-size: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <div class="logo-area">
+      <div class="logo-title">⚡ Hphucdpi</div>
+      <div class="logo-subtitle">FREE FIRE OPTIMIZER</div>
+    </div>
+    <div class="online-badge">ONLINE</div>
+  </div>
+
+  <!-- Section Title -->
+  <div class="section-title">TÍNH NĂNG VIP</div>
+
+  <!-- Feature Cards -->
+  
+  <!-- Card 1 -->
+  <div class="feature-card">
+    <div class="icon-box icon-aim-check">🎯</div>
+    <div class="text-content">
+      <h3>AIM CHECK</h3>
+      <p>Kiểm tra tâm ngắm tự động, tăng độ chính xác</p>
+    </div>
+    <div class="toggle-container">
+      <span class="lock-icon">🔒</span>
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="feature-card">
+    <div class="icon-box icon-aim-body">💀</div>
+    <div class="text-content">
+      <h3>AIM BODY</h3>
+      <p>Hỗ trợ khóa tâm vào thân đối thủ</p>
+    </div>
+    <div class="toggle-container">
+      <span class="lock-icon">🔒</span>
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="feature-card">
+    <div class="icon-box icon-aim-drag">🔄</div>
+    <div class="text-content">
+      <h3>AIM DRAG 2.0</h3>
+      <p>Kéo tâm mượt mà hơn, kiểm soát tốt hơn</p>
+    </div>
+    <div class="toggle-container">
+      <span class="lock-icon">🔒</span>
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Card 4 -->
+  <div class="feature-card">
+    <div class="icon-box icon-anti-band">🛡️</div>
+    <div class="text-content">
+      <h3>ANTI BAND AIM</h3>
+      <p>Chống khóa tâm, bảo vệ tài khoản</p>
+    </div>
+    <div class="toggle-container">
+      <span class="lock-icon">🔒</span>
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Card 5 -->
+  <div class="feature-card">
+    <div class="icon-box icon-dpi">⚡</div>
+    <div class="text-content">
+      <h3>DPI HPHUC</h3>
+      <p>Tối ưu DPI màn hình, tăng độ chính xác</p>
+    </div>
+    <div class="toggle-container">
+      <span class="lock-icon">🔒</span>
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Activation Box -->
+  <div class="activation-box">
+    <div class="activation-title">🔑 NHẬP KEY KÍCH HOẠT</div>
+    <input type="text" class="key-input" value="HPHUC-M-K1M2-03Q4-S506" readonly>
+    <button class="btn-activate">⚡ KÍCH HOẠT NGAY</button>
+    
+    <div style="text-align: center;">
+      <div class="btn-error">❌ KEY không hợp lệ!</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Bottom Navigation -->
+<div class="bottom-nav">
+  <a href="#" class="nav-item">
+    <span class="nav-icon">🏠</span>
+    <span>Trang chủ</span>
+  </a>
+  <a href="#" class="nav-item active">
+    <span class="nav-icon">👑</span>
+    <span>Prime VIP</span>
+  </a>
+  <a href="#" class="nav-item">
+    <span class="nav-icon">📞</span>
+    <span>Liên hệ</span>
+  </a>
+</div>
+
+</body>
+</html>
